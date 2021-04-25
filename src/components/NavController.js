@@ -3,24 +3,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Text, View } from "react-native";
 import AuthNavigation from "../navigation/AuthNavigation";
 import MainNavigation from "../navigation/MainNavigation";
+import { useIsLoggedIn } from "./AuthContext";
 
 export default () => {
-    const [token, setToken] = useState(false);
-    const preLoad = async () => {
-        try {
-            const token = await AsyncStorage.getItem("jwt");
-            console.log(token);
-            setToken(token);
-        } catch (e) {
-            console.log(e);
-        }
-    };
-    useEffect(() => {
-        preLoad();
-    }, []);
+    const isLoggedIn = useIsLoggedIn();
+    console.log(isLoggedIn)
     return (
         <View style={{ flex: 1 }}>
-            {token ? <MainNavigation /> : <AuthNavigation />}
+            {isLoggedIn ? <MainNavigation /> : <AuthNavigation />}
         </View>
     );
 }

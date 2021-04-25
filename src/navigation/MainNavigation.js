@@ -8,9 +8,9 @@ const Stack = createStackNavigator();
 
 export default () => (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="AuthHome" headerMode= "none">
-            <Stack.Screen name="AuthHome" component={AuthHome} />
-            <Stack.Screen name="Signup" component={Signup} />
+        <Stack.Navigator initialRouteName="TimeLine" headerMode= "none">
+            <Stack.Screen name="TimeLine" component={TimeLine} />
+            <Stack.Screen name="WriteDiary" component={WriteDiary} />
         </Stack.Navigator>
     </NavigationContainer>
 )

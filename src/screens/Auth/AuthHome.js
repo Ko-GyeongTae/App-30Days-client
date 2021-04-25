@@ -1,20 +1,39 @@
 import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Alert, Text, TouchableOpacity } from "react-native";
 import styled from "styled-components";
 import * as Font from "expo-font";
 import { useEffect } from "react";
 import InputBox from "../../components/InputBox";
 import useInput from "../../hooks/useInput";
+import { useLogIn } from "../../components/AuthContext";
+import axios from "axios";
+
+const baseUri = "http://10.0.2.2:5000"
 
 export default () => {
     const nameInput = useInput("");
     const pwInput = useInput("");
+    const logIn = useLogIn();
 
     const Login = async() => {
         const { value: name } = nameInput;
         const { value: password } = pwInput;
-
         console.log(name, password);
+        await axios.post(`${baseUri}/auth/login`, {
+            name: name,
+            password: password
+        })
+        .then((response) => {
+            const res_obj = JSON.stringify(response.data);
+            const Obj = JSON.parse(res_obj);
+            console.log(res_obj);
+            const token = Obj["access_token"];
+            logIn(token);
+        })
+        .catch((error) => {
+            Alert.alert('회원정보가 없거나 잘못되었습니다.');
+            console.log(error);
+        });
     }
 
     useEffect(() => {
@@ -28,7 +47,6 @@ export default () => {
                     {...nameInput}
                     placeholder="Name"
                     keyboardType="default"
-                    autoCapitalize={false}
                     autoCorrect={false}
                     />
                 <InputBox
@@ -36,7 +54,6 @@ export default () => {
                     secureTextEntry={true}
                     placeholder="Password"
                     keyboardType="visible-password"
-                    autoCapitalize={false}
                     autoCorrect={false}
                     />
             </Input>
