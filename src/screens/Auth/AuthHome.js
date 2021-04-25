@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import styled from "styled-components";
 import * as Font from "expo-font";
 import { useEffect } from "react";
@@ -9,6 +9,13 @@ import useInput from "../../hooks/useInput";
 export default () => {
     const nameInput = useInput("");
     const pwInput = useInput("");
+
+    const Login = async() => {
+        const { value: name } = nameInput;
+        const { value: password } = pwInput;
+
+        console.log(name, password);
+    }
 
     useEffect(() => {
         Font.loadAsync({'DancingScript-VariableFont_wght': require('../../../assets/fonts/DancingScript-VariableFont_wght.ttf'),});
@@ -32,6 +39,9 @@ export default () => {
                     autoCorrect={false}
                     />
             </Input>
+            <TouchableOpacity onPress={() => Login()}>
+                <Text>Login</Text>
+            </TouchableOpacity>
         </Container>
     );
 }
@@ -40,6 +50,7 @@ const Container = styled.View`
     flex: 1;
     justify-content: center;
     align-items: center;
+    background-color: #f5f5f5;
 `;
 
 const Title = styled.Text`
@@ -49,7 +60,7 @@ const Title = styled.Text`
 `;
 
 const Input = styled.View`
-    margin-top: 30%;
+    margin-top: 15%;
     width: 80%;
     height: 30%;
     background-color: #f5f5f5;
