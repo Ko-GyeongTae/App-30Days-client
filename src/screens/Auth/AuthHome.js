@@ -33,13 +33,14 @@ export default () => {
                     />
                 <InputBox
                     {...pwInput}
+                    secureTextEntry={true}
                     placeholder="Password"
                     keyboardType="visible-password"
                     autoCapitalize={false}
                     autoCorrect={false}
                     />
             </Input>
-            <TouchableOpacity onPress={() => Login()}>
+            <TouchableOpacity style={{margin: "10%"}} onPress={() => Login()}>
                 <Text>Login</Text>
             </TouchableOpacity>
         </Container>
