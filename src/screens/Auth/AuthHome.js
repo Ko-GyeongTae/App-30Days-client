@@ -8,7 +8,7 @@ import useInput from "../../hooks/useInput";
 import { useLogIn } from "../../components/AuthContext";
 import axios from "axios";
 
-const baseUri = "http://10.0.2.2:5000"
+const baseUri = "http://10.0.2.2:5000";
 
 export default () => {
     const nameInput = useInput("");
