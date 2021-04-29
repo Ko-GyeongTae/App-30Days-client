@@ -1,12 +1,13 @@
 import React from "react";
 import { Alert, Text, TouchableOpacity, ImageBackground } from "react-native";
 import styled from "styled-components";
-import * as Font from "expo-font";
+import { useFonts } from "expo-font";
 import { useEffect } from "react";
 import InputBox from "../../components/InputBox";
 import useInput from "../../hooks/useInput";
 import { useLogIn } from "../../components/AuthContext";
 import axios from "axios";
+import { useState } from "react";
 
 const baseUri = "http://10.0.2.2:5000";
 
@@ -15,6 +16,9 @@ export default ({ navigation }) => {
     const pwInput = useInput("");
     const logIn = useLogIn();
 
+    let [fontsLoaded] = useFonts({
+        'DancingScript-VariableFont_wght': require('../../../assets/fonts/DancingScript-VariableFont_wght.ttf')
+    });
     const Login = async () => {
         const { value: name } = nameInput;
         const { value: password } = pwInput;
@@ -36,37 +40,39 @@ export default ({ navigation }) => {
             });
     }
 
-    useEffect(() => {
-        Font.loadAsync({ 'DancingScript-VariableFont_wght': require('../../../assets/fonts/DancingScript-VariableFont_wght.ttf'), });
-    }, []);
-    return (
-        <Container>
-            <ImageBackground source={require("../../../assets/AuthHome.png")} style={{width: "100%", height: "100%", alignItems: "center"}}>
-                <Title>Daily Diary</Title>
-                <Input>
-                    <InputBox
-                        {...nameInput}
-                        placeholder="Name"
-                        keyboardType="default"
-                        autoCorrect={false}
-                    />
-                    <InputBox
-                        {...pwInput}
-                        secureTextEntry={true}
-                        placeholder="Password"
-                        keyboardType="visible-password"
-                        autoCorrect={false}
-                    />
-                </Input>
-                <TouchableOpacity style={{ marginTop: "10%" }} onPress={() => Login()}>
-                    <Text style={{fontFamily: 'DancingScript-VariableFont_wght'}}>Login</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{ marginTop: "5%" }} onPress={() => navigation.navigate("Signup")}>
-                    <Text style={{ fontWeight: "300", fontFamily: 'DancingScript-VariableFont_wght' }}>Sign Up</Text>
-                </TouchableOpacity>
-            </ImageBackground>
-        </Container>
-    );
+    if (!fontsLoaded) {
+        return <Text>Loading</Text>;
+    } else {
+
+        return (
+            <Container>
+                <ImageBackground source={require("../../../assets/AuthHome.png")} style={{ width: "100%", height: "100%", alignItems: "center" }}>
+                    <Title>Daily Diary</Title>
+                    <Input>
+                        <InputBox
+                            {...nameInput}
+                            placeholder="Name"
+                            keyboardType="default"
+                            autoCorrect={false}
+                        />
+                        <InputBox
+                            {...pwInput}
+                            secureTextEntry={true}
+                            placeholder="Password"
+                            keyboardType="visible-password"
+                            autoCorrect={false}
+                        />
+                    </Input>
+                    <TouchableOpacity style={{ marginTop: "10%" }} onPress={() => Login()}>
+                        <Text style={{ fontFamily: 'DancingScript-VariableFont_wght' }}>Login</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{ marginTop: "5%" }} onPress={() => navigation.navigate("Signup")}>
+                        <Text style={{ fontWeight: "300", fontFamily: 'DancingScript-VariableFont_wght' }}>Sign Up</Text>
+                    </TouchableOpacity>
+                </ImageBackground>
+            </Container>
+        );
+    }
 }
 
 const Container = styled.View`
