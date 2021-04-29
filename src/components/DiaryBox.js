@@ -46,7 +46,7 @@ export default (props) => {
   const date = new Date(props.date);
 
   return (
-    <Component onPress={() => props.onPress}>
+    <Component onPress={() => props.onPress()}>
       <Header>
         <Name_Title style={{ fontSize: 20 }}>{props.title}</Name_Title>
         <Date_Text

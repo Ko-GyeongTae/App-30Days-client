@@ -23,7 +23,7 @@ const AllView = styled.View`
     flex: 1;
     background-color: #ffffff;
 `;
-export default () => {
+export default ({ navigation }) => {
     const [diaries, setDiaries] = useState([]);
     const [count, setCount] = useState(0);
 
@@ -42,7 +42,7 @@ export default () => {
     }
     useEffect(() => {
         GetDiary();
-    }, []);
+    }, [count]);
     return (
         <AllView>
             <Header>
@@ -65,7 +65,7 @@ export default () => {
                     {count === 0 && <Text>게시물이 없습니다.</Text>}
                     {diaries?.map((diary) => (
                         <DiaryBox
-                            onPress={() => null}
+                            onPress={() => navigation.navigate("DiaryDetail", diary)}
                             key={diary.postUid}
                             content={diary.content}
                             date={diary.date}
