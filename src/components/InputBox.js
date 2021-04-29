@@ -9,8 +9,9 @@ const TextInput = styled.TextInput`
   font-size: ${(props) => props.fontSize};
   font-weight: 100;
   background-color: #f5f5f5;
-  border-radius: 25px;
+  border-radius: 10px;
   margin-top: 10%;
+  elevation: 2;
 `;
 
 const InputBox = ({
