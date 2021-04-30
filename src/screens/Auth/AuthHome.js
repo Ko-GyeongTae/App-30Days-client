@@ -80,7 +80,7 @@ const Container = styled.View`
     flex: 1;
     justify-content: center;
     align-items: center;
-    background-color: #f5f5f5;
+    background-color: #eceae6;
 `;
 
 const Title = styled.Text`
