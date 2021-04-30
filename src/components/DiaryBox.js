@@ -3,10 +3,10 @@ import styled from "styled-components";
 
 const Component = styled.TouchableOpacity`
   flex: 1;
-  width: 93.6%;
+  width: 350px;
   height: 80px;
-  margin-top: 2%;
-  margin-bottom: 2%;
+  margin-top: 3%;
+  margin-bottom: 3%;
   border-radius: 10px;
   background-color: white;
   elevation: 6;
@@ -15,7 +15,7 @@ const Component = styled.TouchableOpacity`
 const Header = styled.View`
   flex: 1;
   padding-top: 15px;
-  padding-left: 15px;
+  padding-left: 10px;
   justify-content: flex-start;
   align-items: flex-start;
 `;

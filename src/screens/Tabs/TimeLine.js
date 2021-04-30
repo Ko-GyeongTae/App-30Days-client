@@ -6,17 +6,19 @@ import PTRView from 'react-native-pull-to-refresh';
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
-
 const baseUri = "http://10.0.2.2:5000";
 
 const Title = styled.Text`
-    font-size: 50px;
+    padding-top: 30px;
+    padding-left: 15px;
+    font-size: 20px;
+    font-weight: 400;
 `;
 
 const Header = styled.View`
-    height: 15%
+    height: 10%
     background-color: #f5f5f5;
-    
+    justify-content: center;
 `;
 
 const AllView = styled.View`
@@ -26,6 +28,16 @@ const AllView = styled.View`
 export default ({ navigation }) => {
     const [diaries, setDiaries] = useState([]);
     const [count, setCount] = useState(0);
+    const [cookie, setCookie] = useState("");
+
+    const getUser = async () => {
+        await axios
+            .get(`${baseUri}/auth/myprofile`)
+            .then(response => {
+                setCookie(response.data.myProfile)
+            })
+            .catch(error => console.log(error));
+    }
 
     const GetDiary = async () => {
         await axios
@@ -40,17 +52,19 @@ export default ({ navigation }) => {
                 Alert.alert("데이터를 불러올수 없습니다.");
             });
     }
+
     useEffect(() => {
+        getUser();
         GetDiary();
     }, [count]);
     return (
         <AllView>
             <Header>
-                <Title>TimeLine</Title>
+                <Title>{`${cookie.name}'s Diary`}</Title>
             </Header>
             <ImageBackground source={require("../../../assets/coffee.png")} style={{ width: "100%", height: "100%", alignItems: "center" }}>
                 <PTRView
-                    style={{ weight: "85%" }}
+                    style={{ weight: "90%", paddingTop: "3%" }}
                     onRefresh={() => {
                         GetDiary();
                     }}

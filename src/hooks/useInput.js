@@ -3,7 +3,7 @@ import React, {useState} from "react";
 const useInput = (intialValue) => {
     const [value, setValue] = useState(intialValue);
     const onChangeText = text => {
-        if(text.length <= 30){
+        if(text.length <= 18){
             setValue(text);
         }
     };
