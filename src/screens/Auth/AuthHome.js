@@ -7,7 +7,8 @@ import useInput from "../../hooks/useInput";
 import { useLogIn } from "../../components/AuthContext";
 import axios from "axios";
 
-const baseUri = "http://10.0.2.2:5000";
+//const baseUri = "http://10.0.2.2:5000";
+const baseUri = "http://122.34.166.121:5000";
 
 export default ({ navigation }) => {
     const nameInput = useInput("");
@@ -21,10 +22,11 @@ export default ({ navigation }) => {
         const { value: name } = nameInput;
         const { value: password } = pwInput;
         console.log(name, password);
-        await axios.post(`${baseUri}/auth/login`, {
-            name: name,
-            password: password
-        })
+        await axios
+            .post(`${baseUri}/auth/login`, {
+                name: name,
+                password: password
+            })
             .then((response) => {
                 const res_obj = JSON.stringify(response.data);
                 const Obj = JSON.parse(res_obj);

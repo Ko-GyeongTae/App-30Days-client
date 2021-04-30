@@ -1,12 +1,25 @@
 import React from "react";
-import { Text } from "react-native";
+import { ImageBackground, Text } from "react-native";
 import styled from "styled-components";
 import DiaryBox from "../../components/DiaryBox";
 
-const baseUri = "http://10.0.2.2:5000";
+const Header = styled.View`
+  background-color: #ffffff;
+  height: 13%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
 
-const View = styled.View`
-  background-color: red;
+const Body = styled.View`
+  height: 87%;
+  width: 100%;
+  backgroundColor: #f5f5f5;
+`;
+
+const Title = styled.Text`
+  font-size: 20px;
+  font-weight: 500;
 `;
 
 const AllView = styled.View`
@@ -14,60 +27,20 @@ const AllView = styled.View`
   height: 100%;
 `;
 
-const Comment = styled.TextInput`
-  background-color: #d9d9d9;
-  width: 90%;
-  height: 100%;
-  padding-left: 8px;
-  position: absolute;
-  left: 0;
-`;
-
-const Submit = styled.TouchableOpacity`
-  background-color: #d9d9d9;
-  height: 100%;
-  width: 10%;
-  position: absolute;
-  justify-content: center;
-  align-items: center;
-  right: 0;
-`;
-
-export default ({ route, navigation }) => {
-  const post = route.params;
-  console.log(post);
-  return (
-    <AllView>
-      <View
-        style={{
-          height: "13%",
-          justifyContent: "flex-start",
-          alignItems: "center",
-        }}
-      >
-          <Text>Header</Text>
-      </View>
-      <View style={{ height: "87%", width: "100%", backgroundColor: "green" }}>
-        <View
-          style={{
-            backgroundColor: "white",
-            width: "100%",
-            height: 180,
-            alignItems: "center",
-          }}
-        >
-          <DiaryBox
-            key={post.postUid}
-            onPress={() => null}
-            content={post.content}
-            date={post.date}
-            name={post.name}
-            postUid={post.postUid}
-            title={post.title}
-            errfunc={() => navigation.pop()}
-          />
-        </View>
-      </View>
-    </AllView>
-  );
+export default ({ route }) => {
+    const post = route.params;
+    const date = new Date(post.date);
+    return (
+        <AllView>
+            <ImageBackground source={require("../../../assets/coffee.png")} style={{ width: "100%", height: "100%", alignItems: "center" }}>
+                <Header>
+                    <Title>{post.title}</Title>
+                    <Text>{`${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate() - 1 < 10 ? "0" + date.getDate() - 1 : date.getDate() - 1}일`}</Text>
+                </Header>
+                <Body>
+                    <Text>{post.content}</Text>
+                </Body>
+            </ImageBackground>
+        </AllView>
+    );
 };

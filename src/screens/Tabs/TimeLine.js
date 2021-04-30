@@ -6,7 +6,9 @@ import PTRView from 'react-native-pull-to-refresh';
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
-const baseUri = "http://10.0.2.2:5000";
+
+//const baseUri = "http://10.0.2.2:5000";
+const baseUri = "http://122.34.166.121:5000";
 
 const Title = styled.Text`
     padding-top: 30px;
