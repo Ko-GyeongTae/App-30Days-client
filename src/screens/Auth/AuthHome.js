@@ -2,12 +2,10 @@ import React from "react";
 import { Alert, Text, TouchableOpacity, ImageBackground } from "react-native";
 import styled from "styled-components";
 import { useFonts } from "expo-font";
-import { useEffect } from "react";
 import InputBox from "../../components/InputBox";
 import useInput from "../../hooks/useInput";
 import { useLogIn } from "../../components/AuthContext";
 import axios from "axios";
-import { useState } from "react";
 
 const baseUri = "http://10.0.2.2:5000";
 
@@ -43,7 +41,6 @@ export default ({ navigation }) => {
     if (!fontsLoaded) {
         return <Text>Loading</Text>;
     } else {
-
         return (
             <Container>
                 <ImageBackground source={require("../../../assets/AuthHome.png")} style={{ width: "100%", height: "100%", alignItems: "center" }}>
@@ -58,22 +55,26 @@ export default ({ navigation }) => {
                         <InputBox
                             {...pwInput}
                             secureTextEntry={true}
-                            placeholder="Password"
+                            placeholder="Confirm"
                             keyboardType="visible-password"
                             autoCorrect={false}
                         />
                     </Input>
                     <TouchableOpacity style={{ marginTop: "10%" }} onPress={() => Login()}>
-                        <Text style={{ fontFamily: 'DancingScript-VariableFont_wght' }}>Login</Text>
+                        <Button>Login</Button>
                     </TouchableOpacity>
                     <TouchableOpacity style={{ marginTop: "5%" }} onPress={() => navigation.navigate("Signup")}>
-                        <Text style={{ fontWeight: "300", fontFamily: 'DancingScript-VariableFont_wght' }}>Sign Up</Text>
+                        <Button>Sign Up</Button>
                     </TouchableOpacity>
                 </ImageBackground>
             </Container>
         );
     }
 }
+const Button = styled.Text`
+    font-size: 20px;
+    font-family: 'DancingScript-VariableFont_wght';
+`;
 
 const Container = styled.View`
     flex: 1;
@@ -85,7 +86,7 @@ const Container = styled.View`
 const Title = styled.Text`
     font-size: 70px;
     text-align: center;
-    margin-top: 15%;
+    margin-top: 20%;
     font-family: 'DancingScript-VariableFont_wght'
 `;
 
