@@ -69,15 +69,15 @@ export default ({ navigation }) => {
                         />
                         <InputBox
                             {...pwInput}
-                            secureTextEntry={true}
                             placeholder="Password"
+                            secureTextEntry={true}
                             keyboardType="visible-password"
                             autoCorrect={false}
                         />
                         <InputBox
                             {...confirmPw}
+                            placeholder="Confirm"
                             secureTextEntry={true}
-                            placeholder="Password"
                             keyboardType="visible-password"
                             autoCorrect={false}
                         />

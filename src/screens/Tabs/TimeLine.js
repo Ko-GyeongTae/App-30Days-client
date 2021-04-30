@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
 import DiaryBox from "../../components/DiaryBox";
-import { Alert, ScrollView, Text } from 'react-native';
+import { Alert, ImageBackground, ScrollView, Text } from 'react-native';
 import PTRView from 'react-native-pull-to-refresh';
 import { useState } from "react";
 import axios from "axios";
@@ -48,33 +48,35 @@ export default ({ navigation }) => {
             <Header>
                 <Title>TimeLine</Title>
             </Header>
-            <PTRView
-                style={{ weight: "85%", backgroundColor: "yellow" }}
-                onRefresh={() => {
-                    GetDiary();
-                }}
-                pullHeight={100}
-            >
-                <ScrollView
-                    contentContainerStyle={{
-                        width: "100%",
-                        height: "87%",
-                        alignItems: "center",
+            <ImageBackground source={require("../../../assets/coffee.png")} style={{ width: "100%", height: "100%", alignItems: "center" }}>
+                <PTRView
+                    style={{ weight: "85%" }}
+                    onRefresh={() => {
+                        GetDiary();
                     }}
+                    pullHeight={100}
                 >
-                    {count === 0 && <Text>게시물이 없습니다.</Text>}
-                    {diaries?.map((diary) => (
-                        <DiaryBox
-                            onPress={() => navigation.navigate("DiaryDetail", diary)}
-                            key={diary.postUid}
-                            content={diary.content}
-                            date={diary.date}
-                            postUid={diary.postUid}
-                            title={diary.title}
-                        />
-                    ))}
-                </ScrollView>
-            </PTRView>
+                    <ScrollView
+                        contentContainerStyle={{
+                            width: "100%",
+                            height: "87%",
+                            alignItems: "center",
+                        }}
+                    >
+                        {count === 0 && <Text>게시물이 없습니다.</Text>}
+                        {diaries?.map((diary) => (
+                            <DiaryBox
+                                onPress={() => navigation.navigate("DiaryDetail", diary)}
+                                key={diary.postUid}
+                                content={diary.content}
+                                date={diary.date}
+                                postUid={diary.postUid}
+                                title={diary.title}
+                            />
+                        ))}
+                    </ScrollView>
+                </PTRView>
+            </ImageBackground>
         </AllView>
     );
 }
