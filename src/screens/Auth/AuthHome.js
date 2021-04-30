@@ -84,7 +84,7 @@ const Container = styled.View`
 `;
 
 const Title = styled.Text`
-    font-size: 70px;
+    font-size: 60px;
     text-align: center;
     margin-top: 20%;
     font-family: 'DancingScript-VariableFont_wght'

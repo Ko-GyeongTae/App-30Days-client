@@ -109,7 +109,7 @@ const Body = styled.View`
 `;
 
 const Title = styled.Text`
-    font-size: 50px;
+    font-size: 60px;
     font-family: 'DancingScript-VariableFont_wght';
 `;
 
@@ -122,6 +122,6 @@ const Input = styled.View`
 `;
 
 const Button = styled.Text`
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 100;
 `;
