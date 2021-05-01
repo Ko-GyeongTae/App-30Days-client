@@ -98,7 +98,7 @@ export default ({ navigation }) => {
       titleInput.onChangeText("");
       textInput.onChangeText("");
       setLoading(false);
-      navigation.navigate("Home");
+      navigation.navigate("TimeLine");
       Keyboard.dismiss();
       Alert.alert("게시글 작성에 성공하였습니다.");
     } else {
