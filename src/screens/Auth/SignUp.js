@@ -7,8 +7,8 @@ import styled from 'styled-components';
 import InputBox from "../../components/InputBox";
 import useInput from "../../hooks/useInput";
 
-//const baseUri = "http://10.0.2.2:5000";
-const baseUri = "http://122.34.166.121:5000";
+//const baseUri = "http://122.34.166.121:5000";
+const baseUri = "http://10.0.2.2:5000";
 
 export default ({ navigation }) => {
     const nameInput = useInput("");

@@ -5,9 +5,9 @@ import { TextInput } from "react-native-gesture-handler";
 import useInput from "../../hooks/useInput";
 import axios from "axios";
 import { Alert, Keyboard } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const baseUri = "http://122.34.166.121:5000";
+//const baseUri = "http://122.34.166.121:5000";
+const baseUri = "http://10.0.2.2:5000"
 
 const Container = styled.View`
   flex: 1;
@@ -139,7 +139,7 @@ export default ({ navigation }) => {
       </BottomBox>
       <ButtonBox>
         <TouchButton onPress={UploadPost}>
-          {loading ? <Text>Loading</Text> : <WriteButton />}
+          {loading ? <Text>Loading</Text> : <Text>Write</Text>}
         </TouchButton>
       </ButtonBox>
     </Container>
