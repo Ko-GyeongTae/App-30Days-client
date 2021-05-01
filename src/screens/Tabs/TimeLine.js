@@ -6,6 +6,7 @@ import PTRView from 'react-native-pull-to-refresh';
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
+import { useLogOut } from "../../components/AuthContext";
 
 //const baseUri = "http://122.34.166.121:5000";
 const baseUri = "http://10.0.2.2:5000";
@@ -39,14 +40,15 @@ const Header = styled.View`
 `;
 
 const AllView = styled.View`
-    flex: 1;
-    background-color: #ffffff;
+flex: 1;
+background-color: #ffffff;
 `;
 export default ({ navigation }) => {
     const [diaries, setDiaries] = useState([]);
     const [count, setCount] = useState(0);
     const [cookie, setCookie] = useState("");
-
+    const logOut = useLogOut();
+    
     const getUser = async () => {
         await axios
             .get(`${baseUri}/auth/myprofile`)
@@ -63,11 +65,44 @@ export default ({ navigation }) => {
                 console.log(response.data.diarylist);
                 setDiaries(response.data.diarylist);
                 setCount(response.data.totalCount);
+                console.log(count);
             })
             .catch(function (error) {
                 console.log(error);
                 Alert.alert("데이터를 불러올수 없습니다.");
             });
+    }
+
+    const askLogOut = async () => {
+        Alert.alert(
+            "로그아웃 하시겠습니까?",
+            "",
+            [
+                {
+                    text: "네",
+                    onPress: () => LogOut(),
+                },
+                {
+                    text: "아니오",
+                    onPress: () => null,
+                }
+            ],
+            { cancelable: false }
+        );
+    };
+
+    const LogOut = async () => {
+        await axios
+            .get(`${baseUri}/auth/logout`)
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+                Alert.alert("오류가 발생했습니다.");
+            });
+        logOut();
+        Alert.alert("로그아웃 되었습니다");
     }
 
     useEffect(() => {
@@ -84,7 +119,7 @@ export default ({ navigation }) => {
                     <TouchableOpacity onPress={() => navigation.navigate("WriteDiary")}>
                         <Text>Write</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => askLogOut()}>
                         <Text>Logout</Text>
                     </TouchableOpacity>
                 </ButtonView>
