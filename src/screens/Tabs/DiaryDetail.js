@@ -35,7 +35,7 @@ export default ({ route }) => {
             <ImageBackground source={require("../../../assets/coffee.png")} style={{ width: "100%", height: "100%", alignItems: "center" }}>
                 <Header>
                     <Title>{post.title}</Title>
-                    <Text>{`${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate() - 1 < 10 ? "0" + date.getDate() - 1 : date.getDate() - 1}일`}</Text>
+                    <Text>{`${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate() - 1 < 10 ? "0" + date.getDate() - 1 : date.getDate()}일`}</Text>
                 </Header>
                 <Body>
                     <Text>{post.content}</Text>

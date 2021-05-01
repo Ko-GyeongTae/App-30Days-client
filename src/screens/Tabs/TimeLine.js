@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
 import DiaryBox from "../../components/DiaryBox";
-import { Alert, ImageBackground, ScrollView, Text, TouchableOpacity } from 'react-native';
+import { Alert, ImageBackground, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import PTRView from 'react-native-pull-to-refresh';
 import { useState } from "react";
 import axios from "axios";
@@ -17,7 +17,22 @@ const Title = styled.Text`
     font-weight: 400;
 `;
 
+const TitleView = styled.View`
+    width: 70%;
+    height: 100%;
+    background-color: red;
+`;
+
+const ButtonView = styled.View`
+    flex-direction: row;
+    width: 30%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+`;
+
 const Header = styled.View`
+    flex-direction: row;
     height: 10%
     background-color: #f5f5f5;
     justify-content: center;
@@ -62,10 +77,17 @@ export default ({ navigation }) => {
     return (
         <AllView>
             <Header>
-                <Title>{`${cookie.name}'s Diary`}</Title>
-                <TouchableOpacity onPress={() => navigation.navigate("WriteDiary")}>
-                    <Text>Write</Text>
-                </TouchableOpacity>
+                <TitleView>
+                    <Title>{`${cookie.name}'s Diary`}</Title>
+                </TitleView>
+                <ButtonView>
+                    <TouchableOpacity onPress={() => navigation.navigate("WriteDiary")}>
+                        <Text>Write</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text>Logout</Text>
+                    </TouchableOpacity>
+                </ButtonView>
             </Header>
             <ImageBackground source={require("../../../assets/coffee.png")} style={{ width: "100%", height: "100%", alignItems: "center" }}>
                 <PTRView

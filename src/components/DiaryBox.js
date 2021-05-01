@@ -38,14 +38,13 @@ const Day = styled.Text`
 
 export default (props) => {
   const date = new Date(props.date);
-
   return (
     <Component onPress={() => props.onPress()}>
       <Header>
         <Name_Title style={{ fontSize: 20 }}>{props.title}</Name_Title>
       </Header>
       <Bottom>
-        <Day style={{ fontSize: 15 }}>{`${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate() - 1 < 10 ? "0" + date.getDate() - 1 : date.getDate() - 1}일`}</Day>
+        <Day style={{ fontSize: 15 }}>{`${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate() < 10 ? "0" + date.getDate() : date.getDate()}일 ${date.getHours() > 12 ? `오후 ${date.getHours() - 12}` : `오전 ${date.getHours()}`}시 ${date.getMinutes()}분 ${date.getSeconds()}초`}</Day>
       </Bottom>
     </Component>
   );
