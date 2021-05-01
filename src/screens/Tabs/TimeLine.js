@@ -7,9 +7,9 @@ import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import { useLogOut } from "../../components/AuthContext";
+import { BaseUri } from "../../../env";
 
-//const baseUri = "http://122.34.166.121:5000";
-const baseUri = "http://10.0.2.2:5000";
+const baseUri = BaseUri();
 
 const Title = styled.Text`
     padding-top: 30px;

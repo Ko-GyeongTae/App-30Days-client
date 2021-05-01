@@ -1,7 +1,6 @@
 import React from "react";
 import { ImageBackground, Text } from "react-native";
 import styled from "styled-components";
-import DiaryBox from "../../components/DiaryBox";
 
 const Header = styled.View`
   background-color: #ffffff;

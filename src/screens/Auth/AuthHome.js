@@ -6,9 +6,9 @@ import InputBox from "../../components/InputBox";
 import useInput from "../../hooks/useInput";
 import { useLogIn } from "../../components/AuthContext";
 import axios from "axios";
+import { BaseUri } from "../../../env";
 
-//const baseUri = "http://122.34.166.121:5000";
-const baseUri = "http://10.0.2.2:5000";
+const baseUri = BaseUri();
 
 export default ({ navigation }) => {
     const nameInput = useInput("");
@@ -35,6 +35,7 @@ export default ({ navigation }) => {
                 logIn(token);
             })
             .catch((error) => {
+                console.log(baseUri);
                 Alert.alert('회원정보가 없거나 잘못되었습니다.');
                 console.log(error);
             });

@@ -4,11 +4,11 @@ import React from "react";
 import { useState } from "react";
 import { Alert, ImageBackground, Text, TouchableOpacity, View } from "react-native";
 import styled from 'styled-components';
+import { BaseUri } from "../../../env";
 import InputBox from "../../components/InputBox";
 import useInput from "../../hooks/useInput";
 
-//const baseUri = "http://122.34.166.121:5000";
-const baseUri = "http://10.0.2.2:5000";
+const baseUri = BaseUri();
 
 export default ({ navigation }) => {
     const nameInput = useInput("");
