@@ -6,6 +6,7 @@ import { MaterialCommunityIcons } from "react-native-vector-icons";
 import TimeLine from "../screens/Tabs/TimeLine";
 import WriteDiary from "../screens/Tabs/WriteDiary";
 import DiaryDetail from "../screens/Tabs/DiaryDetail";
+import Information from "../screens/Tabs/Information";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -33,6 +34,19 @@ export default () => (
                 keyboardHidesTabBar: true
             }}
         >
+            <Tab.Screen
+                name="Info"
+                component={Information}
+                options={{
+                    tabBarIcon: ({focused}) => (
+                        <MaterialCommunityIcons
+                            name="information-outline"
+                            color={focused ? "#000000" : "#707070"}
+                            size={30}
+                        />
+                    ),
+                }}
+            />
             <Tab.Screen
                 name="Home"
                 component={HomeTabs}
