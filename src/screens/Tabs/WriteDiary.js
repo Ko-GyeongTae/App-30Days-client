@@ -91,16 +91,20 @@ export default ({ navigation }) => {
             content: text,
           }
         )
+        .then(response => {
+          Alert.alert("게시글 작성에 성공하였습니다.");
+        })
         .catch(function (error) {
           Alert.alert("게시물등록에 실패했습니다.");
           console.log(error);
+        })
+        .finally(() => {
+          titleInput.onChangeText("");
+          textInput.onChangeText("");
+          setLoading(false);
+          navigation.navigate("TimeLine");
+          Keyboard.dismiss();
         });
-      titleInput.onChangeText("");
-      textInput.onChangeText("");
-      setLoading(false);
-      navigation.navigate("TimeLine");
-      Keyboard.dismiss();
-      Alert.alert("게시글 작성에 성공하였습니다.");
     } else {
       setLoading(false);
       Keyboard.dismiss();

@@ -6,7 +6,7 @@ import PTRView from 'react-native-pull-to-refresh';
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
-import { useLogOut } from "../../components/AuthContext";
+import { useLogIn, useLogOut } from "../../components/AuthContext";
 import { BaseUri } from "../../../env";
 
 const baseUri = BaseUri();
@@ -48,6 +48,23 @@ export default ({ navigation }) => {
     const [count, setCount] = useState(0);
     const [cookie, setCookie] = useState("");
     const logOut = useLogOut();
+
+    //test code
+    const logIn = useLogIn();
+    const refreshToken = async() => {
+        await axios
+            .post(`${baseUri}/auth/login`, {
+                name: 'taegyeong3',
+                password: 'hello'
+            })
+            .then(response => {
+                const res_obj = JSON.stringify(response.data);
+                const Obj = JSON.parse(res_obj);
+                console.log(res_obj);
+                const token = Obj["access_token"];
+                logIn(token);
+            });
+    }
     
     const getUser = async () => {
         await axios
@@ -116,8 +133,8 @@ export default ({ navigation }) => {
                     <Title>{`${cookie.name}'s Diary`}</Title>
                 </TitleView>
                 <ButtonView>
-                    <TouchableOpacity onPress={() => navigation.navigate("WriteDiary")}>
-                        <Text>Write</Text>
+                    <TouchableOpacity onPress={() => refreshToken()}>
+                        <Text>Refresh</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => askLogOut()}>
                         <Text>Logout</Text>
