@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { TextInput } from "react-native-gesture-handler";
 import useInput from "../../hooks/useInput";
+import useContentInput from "../../hooks/useContentInput";
 import axios from "axios";
 import { Alert, Keyboard } from "react-native";
 import { BaseUri } from "../../../env";
@@ -76,7 +77,7 @@ const Text = styled.Text`
 export default ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const titleInput = useInput("");
-  const textInput = useInput("");
+  const textInput = useContentInput("");
   const logOut = useLogOut();
 
   const UploadPost = async () => {
