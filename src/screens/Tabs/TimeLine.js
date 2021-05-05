@@ -29,14 +29,14 @@ const ButtonView = styled.View`
     width: 30%;
     height: 100%;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end ;
 `;
 
 const Header = styled.View`
     flex-direction: row;
     height: 10%
     background-color: #f5f5f5;
-    justify-content: center;
+    justify-content: flex-end;
 `;
 
 const AllView = styled.View`
@@ -86,7 +86,16 @@ export default ({ navigation }) => {
             })
             .catch(function (error) {
                 console.log(error);
-                Alert.alert("데이터를 불러올수 없습니다.");
+                Alert.alert(
+                    "데이터를 불러올수 없습니다.",
+                    "다시 로그인 해주세요",
+                    [
+                        {
+                            text: "OK",
+                            onPress: () => logOut(),
+                        },
+                    ]
+                );
             });
     }
 

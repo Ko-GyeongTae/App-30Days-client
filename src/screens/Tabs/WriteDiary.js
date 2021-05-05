@@ -6,6 +6,7 @@ import useInput from "../../hooks/useInput";
 import axios from "axios";
 import { Alert, Keyboard } from "react-native";
 import { BaseUri } from "../../../env";
+import { useLogOut } from "../../components/AuthContext";
 
 const baseUri = BaseUri();
 
@@ -76,6 +77,7 @@ export default ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const titleInput = useInput("");
   const textInput = useInput("");
+  const logOut = useLogOut();
 
   const UploadPost = async () => {
     setLoading(true);
@@ -94,9 +96,21 @@ export default ({ navigation }) => {
         .then(response => {
           Alert.alert("게시글 작성에 성공하였습니다.");
         })
-        .catch(function (error) {
-          Alert.alert("게시물등록에 실패했습니다.");
-          console.log(error);
+        .catch(error => {
+          if(error.response.status === '401'){
+            Alert.alert(
+              "게시물등록에 실패했습니다.",
+              "로그인 후 다시 시도해주세요",
+              [
+                {
+                  text: "OK",
+                  onPress: () => logOut(),
+                },
+              ]
+            )
+          } else {
+            Alert.alert("게시물등록에 실패했습니다.");
+          }
         })
         .finally(() => {
           titleInput.onChangeText("");
@@ -125,6 +139,7 @@ export default ({ navigation }) => {
               fontSize={16}
               placeholder="  제목을 입력해주세요"
               autoCorrect={false}
+              returnKeyType="next"
             />
           </View>
           <_View>
@@ -134,6 +149,7 @@ export default ({ navigation }) => {
               placeholder="  내용을 입력해주세요"
               style={{ flexShrink: 1, width:"100%", height:"70%", textAlign:"left", textAlignVertical:"top"}}
               multiline={true}
+              returnKeyType="next"
             />
           </_View>
         </CenterInnerBox>
