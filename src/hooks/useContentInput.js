@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export default (intialValue) => {
     const [value, setValue] = useState(intialValue);
     const onChangeText = text => {

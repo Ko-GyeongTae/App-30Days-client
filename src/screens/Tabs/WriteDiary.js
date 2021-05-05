@@ -98,7 +98,7 @@ export default ({ navigation }) => {
           Alert.alert("게시글 작성에 성공하였습니다.");
         })
         .catch(error => {
-          if(error.response.status === '401'){
+          if(error.response.status === 401){
             Alert.alert(
               "게시물등록에 실패했습니다.",
               "로그인 후 다시 시도해주세요",
@@ -111,6 +111,7 @@ export default ({ navigation }) => {
             )
           } else {
             Alert.alert("게시물등록에 실패했습니다.");
+            console.log(error);
           }
         })
         .finally(() => {
