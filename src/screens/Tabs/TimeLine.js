@@ -2,6 +2,7 @@ import React from "react";
 import styled from 'styled-components';
 import DiaryBox from "../../components/DiaryBox";
 import { Alert, ImageBackground, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { MaterialCommunityIcons } from "react-native-vector-icons";
 import PTRView from 'react-native-pull-to-refresh';
 import { useState } from "react";
 import axios from "axios";
@@ -21,7 +22,7 @@ const Title = styled.Text`
 const TitleView = styled.View`
     width: 70%;
     height: 100%;
-    background-color: red;
+    justify-content: center;
 `;
 
 const ButtonView = styled.View`
@@ -29,12 +30,13 @@ const ButtonView = styled.View`
     width: 30%;
     height: 100%;
     justify-content: center;
-    align-items: flex-end ;
+    padding-top: 6%;
+    align-items: center;
 `;
 
 const Header = styled.View`
     flex-direction: row;
-    height: 10%
+    height: 12%
     background-color: #f5f5f5;
     justify-content: flex-end;
 `;
@@ -146,7 +148,11 @@ export default ({ navigation }) => {
                         <Text>Refresh</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => askLogOut()}>
-                        <Text>Logout</Text>
+                        <MaterialCommunityIcons
+                            name="logout"
+                            color="#707070"
+                            size={40}
+                        />
                     </TouchableOpacity>
                 </ButtonView>
             </Header>
