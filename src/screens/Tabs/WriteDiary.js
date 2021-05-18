@@ -36,21 +36,20 @@ const CenterInnerBox = styled.View`
   background-color: #ebeeef;
 `;
 
-const BottomBox = styled.View`
-  width: 100%;
-  height: 9.3%;
-`;
-
 const ButtonBox = styled.View`
   width: 100%;
   height: 16.4%;
+  margin-top: 100px;
   align-items: center;
 `;
 
 const TouchButton = styled.TouchableOpacity`
-  width: 100%;
-  height: 35%;
+  width: 150px;
+  height: 40px;
+  background-color: #ebeeef;
   align-items: center;
+  justify-content: center;
+  border-radius: 10px;
 `;
 
 const View = styled.View`
@@ -64,14 +63,15 @@ const View = styled.View`
 const _View = styled.View`
   background-color: white;
   width: 92%;
-  height: 100%;
+  height: 80%;
   margin-top: 4%;
   alignItems: flex-start;
   justifyContent: flex-start;
 `;
 
-const Text = styled.Text`
+const ButtonText = styled.Text`
   color: black;
+  font-size: 20px;
 `;
 
 export default ({ navigation }) => {
@@ -130,9 +130,7 @@ export default ({ navigation }) => {
   };
   return (
     <Container>
-      <HeaderBox>
-      </HeaderBox>
-
+      <HeaderBox/>
       <CenterBox>
         <CenterInnerBox>
           <View>
@@ -156,12 +154,9 @@ export default ({ navigation }) => {
           </_View>
         </CenterInnerBox>
       </CenterBox>
-      <BottomBox>
-
-      </BottomBox>
       <ButtonBox>
         <TouchButton onPress={UploadPost}>
-          {loading ? <Text>Loading</Text> : <Text>Write</Text>}
+          {loading ? <ButtonText>Loading</ButtonText> : <ButtonText>Write</ButtonText>}
         </TouchButton>
       </ButtonBox>
     </Container>
