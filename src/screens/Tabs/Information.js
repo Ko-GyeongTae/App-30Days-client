@@ -1,12 +1,50 @@
+import axios from 'axios';
 import { useFonts } from 'expo-font';
 import React from 'react';
-import { Text } from 'react-native';
+import { Alert, Text, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
+import { BaseUri } from '../../../env';
+import { useLogOut } from '../../components/AuthContext';
+
+const baseUri = BaseUri();
 
 export default () => {
+    const logOut = useLogOut();
     let [fontsLoaded] = useFonts({
         'DancingScript-VariableFont_wght': require('../../../assets/fonts/DancingScript-VariableFont_wght.ttf')
     });
+
+    const askWithDrawl = async () => {
+        Alert.alert(
+            "탈퇴 하시겠습니까?",
+            "탈퇴 후 자료는 복구 할 수 없습니다.",
+            [
+                {
+                    text: "네",
+                    onPress: () => withDrawal(),
+                },
+                {
+                    text: "아니오",
+                    onPress: () => null,
+                }
+            ],
+            { cancelable: false }
+        );
+    };
+
+    const withDrawal = async() => {
+        await axios
+            .delete(`${baseUri}/auth/drop`)
+            .then(response => {
+                //console.log(response)
+            })
+            .catch(error => {
+                console.log(error);
+                Alert.alert("회원탈퇴를 할 수 없습니다.");
+            });
+        logOut();
+        Alert.alert("회원탈퇴에 성공했습니다.");
+    }
     if(!fontsLoaded){
         return <Text>Loading</Text>
     }
@@ -40,6 +78,9 @@ export default () => {
                         <Text>Ubuntu Server</Text>
                     </Post>
                 </PostArea>
+                <TouchableOpacity style={{ paddingTop: "30%" }} onPress={() => askWithDrawl()}>
+                    <Header style={{fontSize: 20}}>Delete Account</Header>
+                </TouchableOpacity>
             </TextBox>
         </Container>
     );

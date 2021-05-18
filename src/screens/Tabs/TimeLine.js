@@ -88,16 +88,24 @@ export default ({ navigation }) => {
             })
             .catch(function (error) {
                 console.log(error);
-                Alert.alert(
-                    "데이터를 불러올수 없습니다.",
-                    "다시 로그인 해주세요",
-                    [
+                if(error.response.status === 404){
+                    Alert.alert(
+                      "게시물을 가져오는데 실패했습니다.",
+                      "문제가 계속된다면 로그인 후 다시 시도해주세요",
+                      [
                         {
-                            text: "OK",
-                            onPress: () => logOut(),
+                          text: "OK",
+                          onPress: () => logOut(),
                         },
-                    ]
-                );
+                        {
+                          text: "Cancel",
+                          onPress: () => null
+                        }
+                      ]
+                    )
+                  } else {
+                    console.log(error);
+                  }
             });
     }
 
@@ -145,7 +153,7 @@ export default ({ navigation }) => {
                 </TitleView>
                 <ButtonView>
                     <TouchableOpacity onPress={() => refreshToken()}>
-                        <Text>Refresh</Text>
+                        <Text>{null}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => askLogOut()}>
                         <MaterialCommunityIcons
